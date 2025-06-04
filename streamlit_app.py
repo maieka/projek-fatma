@@ -26,6 +26,19 @@ st.markdown(
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+    }
+
+    /* Top Group Header */
+    .group-header {
+        font-weight: 700;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: #ffe066;
+        text-align: center;
+        user-select: none;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        letter-spacing: 1.2px;
     }
 
     /* Main container with glassmorphism */
@@ -128,12 +141,16 @@ st.markdown(
         margin-top: 2rem;
     }
 
-    /* Footer style */
+    /* Footer style updated */
     .footer {
         margin-top: 3rem;
-        font-size: 0.9rem;
-        color: #d1c4e9bb;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ffe066cc;
         user-select: none;
+        text-align: center;
+        letter-spacing: 0.6px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
     /* Responsive tweaks */
@@ -144,11 +161,17 @@ st.markdown(
         .title {
             font-size: 2.4rem;
         }
+        .group-header {
+            font-size: 1.4rem;
+        }
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
+# Top header for group name
+st.markdown('<div class="group-header">Aplikasi Kelompok Fatma</div>', unsafe_allow_html=True)
 
 # Main container div
 st.markdown('<div class="container">', unsafe_allow_html=True)
@@ -188,9 +211,8 @@ else:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Footer
+# Footer updated
 st.markdown(
-    '<div class="footer">© 2024 Streamlit Aplikasi Konversi Suhu - dibuat dengan ❤️</div>',
+    '<div class="footer">Kelompok Fatma</div>',
     unsafe_allow_html=True
 )
-

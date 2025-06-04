@@ -1,37 +1,36 @@
 import streamlit as st
 
-# Konfigurasi halaman
-st.set_page_config(page_title="Pengantar Streamlit", page_icon="📘")
+st.title("Aplikasi Pertama Fatma ni bos")
+st.header("Selamat datang di Web fatma")
+st.write("Ini adalah web app pertama fatma menggunakan Python dan Streamlit!")
 
-# Judul dan Deskripsi
-st.title("📘 Pengantar Streamlit")
-st.markdown("Selamat datang di pembelajaran *Web Aplikasi Python* menggunakan **Streamlit**.")
-
-st.markdown("---")
-st.subheader("👀 Apa itu Streamlit?")
-st.markdown("""
-Streamlit adalah framework Python yang digunakan untuk membuat **aplikasi web interaktif** secara **mudah dan cepat**.
-
-### Keunggulan:
-- Sederhana & cepat dipelajari
-- Langsung dari script Python
-- Ideal untuk prototipe, dashboard, dan aplikasi data
-
-""")
-
-st.markdown("---")
-st.subheader("💡 Contoh Program Pertama:")
-st.code("""
 import streamlit as st
 
-st.title("Halo Dunia!")
-st.write("Ini adalah aplikasi web pertamaku menggunakan Streamlit.")
-""", language="python")
+# Judul Aplikasi
+st.title("Konversi Suhu")
+st.write("Aplikasi ini mengubah suhu dari Celsius ke Fahrenheit dan sebaliknya.")
 
-st.markdown("Coba jalankan kode ini dengan perintah terminal:")
-st.code("streamlit run app.py")
+# Pilihan arah konversi
+konversi = st.selectbox(
+    "Pilih konversi:",
+    ["Celsius ke Fahrenheit", "Fahrenheit ke Celsius"]
+)
 
-st.markdown("---")
-st.success("✅ Selamat! Kamu telah mengenal dasar-dasar Streamlit.")
+# Input suhu
+suhu = st.number_input("Masukkan suhu:")
 
+# Fungsi konversi
+def c_to_f(c):
+    return (c * 9/5) + 32
 
+def f_to_c(f):
+    return (f - 32) * 5/9
+
+# Tombol konversi
+if st.button("Konversi"):
+    if konversi == "Celsius ke Fahrenheit":
+        hasil = c_to_f(suhu)
+        st.success(f"{suhu}°C = {hasil:.2f}°F")
+    else:
+        hasil = f_to_c(suhu)
+        st.success(f"{suhu}°F = {hasil:.2f}°C")

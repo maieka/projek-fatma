@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("Hello Dunia!")
-st.header("Web App Pertamaku")
-st.write("Belajar Streamlit sangat menyenangkan.")
+st.title("Aplikasi Pertama Fatma ni bos")
+st.header("Selamat datang di Web fatma")
+st.write("Ini adalah web app pertama fatma menggunakan Python dan Streamlit!")
 

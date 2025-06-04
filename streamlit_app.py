@@ -1,43 +1,33 @@
 import streamlit as st
-import requests
 
-st.set_page_config(page_title="Aplikasi Cuaca", page_icon="⛅", layout="centered")
+# Data cuaca statis
+data_cuaca = {
+    "Jakarta": {"suhu": 31, "kelembapan": 75, "cuaca": "Cerah Berawan"},
+    "Bandung": {"suhu": 24, "kelembapan": 85, "cuaca": "Hujan Ringan"},
+    "Surabaya": {"suhu": 34, "kelembapan": 70, "cuaca": "Cerah"},
+    "Medan": {"suhu": 30, "kelembapan": 80, "cuaca": "Berawan"},
+    "Yogyakarta": {"suhu": 29, "kelembapan": 78, "cuaca": "Berawan Tebal"},
+}
+
+st.set_page_config(page_title="Cuaca Tanpa API", page_icon="🌤️", layout="centered")
 
 st.markdown("""
-    <h1 style='text-align: center; color: #4A90E2;'>⛅ Aplikasi Cek Cuaca</h1>
-    <h4 style='text-align: center; color: grey;'>Gunakan API OpenWeather untuk melihat suhu, kelembapan, dan kondisi cuaca.</h4>
-    <hr style='border-top: 3px solid #4A90E2;'>
+    <h1 style='text-align: center; color: #2196F3;'>🌤️ Info Cuaca (Data Statis)</h1>
+    <p style='text-align: center; color: grey;'>Lihat prakiraan cuaca berdasarkan data lokal sederhana</p>
+    <hr style='border-top: 3px solid #2196F3;'>
 """, unsafe_allow_html=True)
 
-# Ganti ini dengan API key dari OpenWeatherMap.org
-api_key = "MASUKKAN_API_KEY_ANDA_DI_SINI"
-base_url = "http://api.openweathermap.org/data/2.5/weather?"
+# Pilih kota
+kota = st.selectbox("Pilih Kota", list(data_cuaca.keys()))
 
-# Input kota dari user
-city_name = st.text_input("Masukkan nama kota (misal: Jakarta):")
-
-if st.button("🔍 Cek Cuaca"):
-    if not api_key or api_key == "MASUKKAN_API_KEY_ANDA_DI_SINI":
-        st.warning("⚠️ Silakan masukkan API key Anda di dalam kode terlebih dahulu.")
-    elif city_name:
-        complete_url = f"{base_url}appid={api_key}&q={city_name}&units=metric"
-        response = requests.get(complete_url)
-        data = response.json()
-
-        if data["cod"] != "404":
-            main = data["main"]
-            weather = data["weather"][0]
-            temp = main["temp"]
-            humidity = main["humidity"]
-            desc = weather["description"].capitalize()
-
-            st.markdown(f"""
-                <div style='background-color: #E3F2FD; padding: 20px; border-radius: 10px;'>
-                    <h3 style='color: #0D47A1;'>🌍 Cuaca di {city_name.title()}</h3>
-                    <p><b>Suhu:</b> {temp} °C</p>
-                    <p><b>Kelembapan:</b> {humidity}%</p>
-                    <p><b>Kondisi:</b> {desc}</p>
-                </div>
-            """, unsafe_allow_html=True)
-        else:
-            st.error("Kota tidak ditemukan. Coba lagi.")
+# Tampilkan hasil
+if kota:
+    info = data_cuaca[kota]
+    st.markdown(f"""
+        <div style='background-color: #E3F2FD; padding: 20px; border-radius: 10px;'>
+            <h3 style='color: #0D47A1;'>🌍 Cuaca di {kota}</h3>
+            <p><b>Suhu:</b> {info['suhu']} °C</p>
+            <p><b>Kelembapan:</b> {info['kelembapan']}%</p>
+            <p><b>Kondisi:</b> {info['cuaca']}</p>
+        </div>
+    """, unsafe_allow_html=True)

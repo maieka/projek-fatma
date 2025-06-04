@@ -1,36 +1,56 @@
 import streamlit as st
 
-st.title("Aplikasi Pertama Fatma ni bos")
-st.header("Selamat datang di Web fatma")
-st.write("Ini adalah web app pertama fatma menggunakan Python dan Streamlit!")
-
-import streamlit as st
-
-# Judul Aplikasi
-st.title("Konversi Suhu")
-st.write("Aplikasi ini mengubah suhu dari Celsius ke Fahrenheit dan sebaliknya.")
-
-# Pilihan arah konversi
-konversi = st.selectbox(
-    "Pilih konversi:",
-    ["Celsius ke Fahrenheit", "Fahrenheit ke Celsius"]
+# Konfigurasi halaman
+st.set_page_config(
+    page_title="Aplikasi Streamlit Interaktif",
+    page_icon="🚀",
+    layout="centered"
 )
 
-# Input suhu
-suhu = st.number_input("Masukkan suhu:")
+# ====================
+# Header & Deskripsi
+# ====================
+st.markdown("<h1 style='text-align: center; color: #4B8BBE;'>🚀 Web Aplikasi Interaktif</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: grey;'>Contoh aplikasi sederhana dengan tampilan menarik menggunakan Streamlit</h4>", unsafe_allow_html=True)
+st.markdown("---")
 
-# Fungsi konversi
-def c_to_f(c):
-    return (c * 9/5) + 32
+# ====================
+# Form Input (Dua Kolom)
+# ====================
+st.subheader("🔢 Input Data")
 
-def f_to_c(f):
-    return (f - 32) * 5/9
+col1, col2 = st.columns(2)
 
-# Tombol konversi
-if st.button("Konversi"):
-    if konversi == "Celsius ke Fahrenheit":
-        hasil = c_to_f(suhu)
-        st.success(f"{suhu}°C = {hasil:.2f}°F")
-    else:
-        hasil = f_to_c(suhu)
-        st.success(f"{suhu}°F = {hasil:.2f}°C")
+with col1:
+    angka1 = st.number_input("Masukkan Angka Pertama", step=1)
+
+with col2:
+    angka2 = st.number_input("Masukkan Angka Kedua", step=1)
+
+# ====================
+# Pilihan Operasi
+# ====================
+operasi = st.selectbox("Pilih Operasi", ["Tambah", "Kurang", "Kali", "Bagi"])
+
+# ====================
+# Tombol dan Hasil
+# ====================
+if st.button("💡 Hitung"):
+    if operasi == "Tambah":
+        hasil = angka1 + angka2
+        st.success(f"Hasil penjumlahan: {hasil}")
+    elif operasi == "Kurang":
+        hasil = angka1 - angka2
+        st.success(f"Hasil pengurangan: {hasil}")
+    elif operasi == "Kali":
+        hasil = angka1 * angka2
+        st.success(f"Hasil perkalian: {hasil}")
+    elif operasi == "Bagi":
+        if angka2 != 0:
+            hasil = angka1 / angka2
+            st.success(f"Hasil pembagian: {hasil:.2f}")
+        else:
+            st.error("❌ Tidak bisa membagi dengan nol.")
+
+st.markdown("---")
+st.caption("📘 Dibuat oleh Kelompok X | Proyek Streamlit 2025")
